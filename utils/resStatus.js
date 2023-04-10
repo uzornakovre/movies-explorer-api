@@ -2,9 +2,7 @@ const ResStatus = {
   OK: {
     CODE: 200,
     MESSAGE: 'Запрос успешно выполнен',
-    DEL_CARD_MESSAGE: 'Карточка удалена',
-    LIKE_CARD_MESSAGE: 'Лайк добавлен',
-    DISLIKE_CARD_MESSAGE: 'Лайк удален',
+    DEL_MOVIE_MESSAGE: 'Фильм удален',
     AUTH_MESSAGE: 'Авторизация прошла успешно!',
   },
   CREATED: {
@@ -28,7 +26,7 @@ const ResStatus = {
   NOT_FOUND: {
     CODE: 404,
     USER_MESSAGE: 'Пользователь с таким именем не найден',
-    CARD_MESSAGE: 'Карточка не найдена',
+    MOVIE_MESSAGE: 'Фильм не найден',
     PAGE_MESSAGE: 'Страницы не существует',
   },
   CONFLICT: {
