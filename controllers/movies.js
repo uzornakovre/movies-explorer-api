@@ -23,13 +23,13 @@ module.exports.saveMovie = (req, res, next) => {
     year,
     description,
     image,
-    trailer,
+    trailerLink,
     nameEN,
     nameRU,
     thumbnail,
     movieId,
   } = req.body;
-  // const ownerId = req.user._id;
+  const ownerId = req.user._id;
 
   Movie.create({
     country,
@@ -38,16 +38,17 @@ module.exports.saveMovie = (req, res, next) => {
     year,
     description,
     image,
-    trailer,
+    trailerLink,
     nameEN,
     nameRU,
     thumbnail,
     movieId,
+    owner: ownerId,
   })
     .then((movie) => res.status(CREATED.CODE).send(movie))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new InvalidDataError(INVALID_DATA.MESSAGE));
+        next(new InvalidDataError(`${INVALID_DATA.MESSAGE}: ${err.message}`));
       } else {
         next(err);
       }
