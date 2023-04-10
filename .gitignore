@@ -33,6 +33,5 @@ yarn-error.log*
 # delete later
 /controllers
 /middlewares
-/models
 /routes
 app.js
