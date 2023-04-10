@@ -32,5 +32,4 @@ yarn-error.log*
 
 # delete later
 /controllers
-/routes
 app.js
