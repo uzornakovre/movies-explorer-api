@@ -35,6 +35,5 @@ yarn-error.log*
 /middlewares
 /models
 /routes
-/utils
 config.js
 app.js
