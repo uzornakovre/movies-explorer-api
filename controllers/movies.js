@@ -59,7 +59,7 @@ module.exports.deleteMovie = (req, res, next) => {
 
   Movie.findById(movieId)
     .then((movie) => {
-      if (movie) {
+      if (movie && String(movie.owner) === req.user._id) {
         Movie.deleteOne(movie._id)
           .then(() => {
             res.status(OK.CODE).send({ message: OK.DEL_MOVIE_MESSAGE });
