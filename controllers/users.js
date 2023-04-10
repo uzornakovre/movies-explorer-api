@@ -19,18 +19,6 @@ module.exports.getUsers = (req, res, next) => {
     .catch(next);
 };
 
-// module.exports.getUser = (req, res, next) => {
-//   User.findById(req.params.userId)
-//     .then((user) => {
-//       if (user) {
-//         res.status(OK.CODE).send({ data: user });
-//       } else {
-//         next(new NotFoundError(NOT_FOUND.USER_MESSAGE));
-//       }
-//     })
-//     .catch(next);
-// };
-
 module.exports.createUser = (req, res, next) => {
   const { email, password, name } = req.body;
 

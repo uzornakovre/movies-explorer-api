@@ -10,7 +10,6 @@ const {
 
 module.exports.getMovies = (req, res, next) => {
   Movie.find({})
-    // .populate(['owner'])
     .then((movies) => res.status(OK.CODE).send(movies))
     .catch(next);
 };
