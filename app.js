@@ -1,4 +1,5 @@
 const express = require('express');
+const helmet = require("helmet");
 const cors = require('cors');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
@@ -12,6 +13,7 @@ const app = express();
 
 mongoose.connect(DB_ADDRESS);
 
+app.use(helmet());
 app.use(cors());
 app.use(express.json());
 app.use(requestLogger);
