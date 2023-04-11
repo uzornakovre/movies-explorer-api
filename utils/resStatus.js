@@ -25,7 +25,7 @@ const ResStatus = {
   },
   NOT_FOUND: {
     CODE: 404,
-    USER_MESSAGE: 'Пользователь с таким именем не найден',
+    USER_MESSAGE: 'Пользователь с таким ID не найден',
     MOVIE_MESSAGE: 'Фильм не найден',
     PAGE_MESSAGE: 'Страницы не существует',
   },
