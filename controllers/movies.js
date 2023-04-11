@@ -49,7 +49,7 @@ module.exports.saveMovie = (req, res, next) => {
     .then((movie) => res.status(CREATED.CODE).send(movie))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new InvalidDataError(`${INVALID_DATA.MESSAGE}: ${err.message}`));
+        next(new InvalidDataError(INVALID_DATA.MESSAGE));
       } else {
         next(err);
       }
