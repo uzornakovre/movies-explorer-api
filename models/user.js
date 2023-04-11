@@ -2,6 +2,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const validator = require('validator');
+const UnauthorizedError = require('../utils/errors/UnauthorizedError');
 const { UNAUTHORIZED } = require('../utils/resStatus');
 
 const userSchema = new mongoose.Schema({
@@ -18,13 +19,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     select: false,
-    minlength: 4,
   },
   name: {
     type: String,
-    minlength: 2,
-    maxlength: 30,
-    default: 'Новый пользователь',
+    required: true,
   },
 });
 
@@ -33,18 +31,12 @@ userSchema.statics.findUserByCredentials = function (email, password) {
   return this.findOne({ email }).select('+password')
     .then((user) => {
       if (!user) {
-        return Promise.reject({
-          statusCode: UNAUTHORIZED.CODE,
-          message: UNAUTHORIZED.USER_MESSAGE,
-        });
+        return Promise.reject(new UnauthorizedError(UNAUTHORIZED.USER_MESSAGE));
       }
       return bcrypt.compare(password, user.password)
         .then((matched) => {
           if (!matched) {
-            return Promise.reject({
-              statusCode: UNAUTHORIZED.CODE,
-              message: UNAUTHORIZED.PASSWORD_MESSAGE,
-            });
+            return Promise.reject(new UnauthorizedError(UNAUTHORIZED.PASSWORD_MESSAGE));
           }
           return user;
         });
