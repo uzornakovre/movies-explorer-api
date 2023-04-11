@@ -1,11 +1,13 @@
 const Movie = require('../models/movie');
 const InvalidDataError = require('../utils/errors/InvalidDataError');
 const NotFoundError = require('../utils/errors/NotFoundError');
+const ForbiddenError = require('../utils/errors/ForbiddenError');
 const {
   OK,
   CREATED,
   INVALID_DATA,
   NOT_FOUND,
+  FORBIDDEN,
 } = require('../utils/resStatus');
 
 module.exports.getMovies = (req, res, next) => {
@@ -55,9 +57,9 @@ module.exports.saveMovie = (req, res, next) => {
 };
 
 module.exports.deleteMovie = (req, res, next) => {
-  const { movieId } = req.params;
+  const { _id } = req.params;
 
-  Movie.findById(movieId)
+  Movie.findById(_id)
     .then((movie) => {
       if (movie && String(movie.owner) === req.user._id) {
         Movie.deleteOne(movie._id)
@@ -65,7 +67,9 @@ module.exports.deleteMovie = (req, res, next) => {
             res.status(OK.CODE).send({ message: OK.DEL_MOVIE_MESSAGE });
           })
           .catch((err) => next(err));
-      } else {
+      } else if (movie) {
+        next(new ForbiddenError(FORBIDDEN.MESSAGE));
+      } else if (!movie) {
         next(new NotFoundError(NOT_FOUND.MOVIE_MESSAGE));
       }
     })

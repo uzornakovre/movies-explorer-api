@@ -6,6 +6,6 @@ const { getMovies, saveMovie, deleteMovie } = require('../controllers/movies');
 router.use(auth);
 router.get('/', getMovies);
 router.post('/', saveMovieValidation, saveMovie);
-router.delete('/:movieId', deleteMovieValidation, deleteMovie);
+router.delete('/:_id', deleteMovieValidation, deleteMovie);
 
 module.exports = router;
