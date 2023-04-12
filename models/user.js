@@ -1,4 +1,3 @@
-/* eslint-disable prefer-promise-reject-errors */
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const validator = require('validator');
