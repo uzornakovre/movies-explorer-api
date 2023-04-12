@@ -12,7 +12,9 @@ const {
 
 module.exports.getMovies = (req, res, next) => {
   Movie.find({})
-    .then((movies) => res.status(OK.CODE).send(movies))
+    .then((movies) => res.status(OK.CODE).send(
+      movies.filter((movie) => String(movie.owner) === req.user._id),
+    ))
     .catch(next);
 };
 
